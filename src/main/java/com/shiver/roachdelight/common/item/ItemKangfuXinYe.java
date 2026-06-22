@@ -1,5 +1,6 @@
 package com.shiver.roachdelight.common.item;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -11,6 +12,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +25,13 @@ public class ItemKangfuXinYe extends ItemFood {
     }
 
     @Override
-    public EnumAction getItemUseAction(ItemStack stack) {
+    @MethodsReturnNonnullByDefault
+    public EnumAction getItemUseAction(@Nonnull ItemStack stack) {
         return EnumAction.DRINK;
     }
 
     @Override
-    protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
+    protected void onFoodEaten(@Nonnull ItemStack stack, World worldIn, @Nonnull EntityPlayer player) {
         if (worldIn.isRemote) {
             return;
         }
@@ -48,7 +51,8 @@ public class ItemKangfuXinYe extends ItemFood {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
+    @MethodsReturnNonnullByDefault
+    public ItemStack onItemUseFinish(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull EntityLivingBase entityLiving) {
         ItemStack result = super.onItemUseFinish(stack, worldIn, entityLiving);
         if (entityLiving instanceof EntityPlayer && !((EntityPlayer) entityLiving).capabilities.isCreativeMode) {
             EntityPlayer player = (EntityPlayer) entityLiving;

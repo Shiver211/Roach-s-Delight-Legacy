@@ -1,5 +1,6 @@
 package com.shiver.roachdelight.common.item;
 
+import mcp.MethodsReturnNonnullByDefault;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -9,6 +10,8 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.init.MobEffects;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class ItemRoachBottle extends ItemFood {
     public ItemRoachBottle() {
         super(1, 0.1F, false);
@@ -16,14 +19,15 @@ public class ItemRoachBottle extends ItemFood {
     }
 
     @Override
-    protected void onFoodEaten(ItemStack stack, World worldIn, EntityPlayer player) {
+    protected void onFoodEaten(@Nonnull ItemStack stack, World worldIn, @Nonnull EntityPlayer player) {
         if (!worldIn.isRemote) {
             player.addPotionEffect(new PotionEffect(MobEffects.POISON, 30 * 20));
         }
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
+    @MethodsReturnNonnullByDefault
+    public ItemStack onItemUseFinish(@Nonnull ItemStack stack, @Nonnull World worldIn, @Nonnull EntityLivingBase entityLiving) {
         ItemStack result = super.onItemUseFinish(stack, worldIn, entityLiving);
         if (!worldIn.isRemote && entityLiving instanceof EntityPlayer && !((EntityPlayer) entityLiving).capabilities.isCreativeMode) {
             EntityPlayer player = (EntityPlayer) entityLiving;

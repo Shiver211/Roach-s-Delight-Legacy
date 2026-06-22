@@ -11,6 +11,8 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.IThrowableEntity;
 
+import javax.annotation.Nonnull;
+
 public class EntityRoachBottle extends EntityThrowable implements IThrowableEntity {
     public EntityRoachBottle(World worldIn) {
         super(worldIn);
@@ -53,7 +55,7 @@ public class EntityRoachBottle extends EntityThrowable implements IThrowableEnti
     }
 
     @Override
-    protected void onImpact(RayTraceResult result) {
+    protected void onImpact(@Nonnull RayTraceResult result) {
         if (!this.world.isRemote) {
             EntityCockroach roach = new EntityCockroach(this.world);
             roach.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, 0.0F);
